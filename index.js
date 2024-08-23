@@ -37,6 +37,14 @@ class Pokemon {
         }
         return false;
     }
+
+    showInfo() {
+        console.log(chalk.cyan(`\n${this.name.toUpperCase()} INFO`));
+        console.log(chalk.cyan(`HP: ${this.hp}`));
+        console.log(chalk.cyan(`Attack: ${this.attack}`));
+        console.log(chalk.cyan(`Defense: ${this.defense}`));
+        console.log(chalk.cyan(`Moves: ${this.moves.join(', ')}\n`));
+    }
 }
 
 // Prompt user to choose a starter Pokémon
@@ -68,7 +76,7 @@ const battle = async (playerPokemon, wildPokemon) => {
                 type: 'list',
                 name: 'action',
                 message: 'Choose an action:',
-                choices: ['Fight', 'Run'],
+                choices: ['Fight', 'Info', 'Run'],
             }
         ]);
         if (answers.action === 'Fight') {
@@ -82,9 +90,13 @@ const battle = async (playerPokemon, wildPokemon) => {
                 console.log(chalk.red(`Your ${playerPokemon.name} fainted! Game Over.`));
                 process.exit(1);
             }
-        } else {
+        } else if (answers.action === 'Info') {
+            playerPokemon.showInfo();
+        } else if (answers.action === 'Run') {
             console.log(chalk.cyan('You ran away!'));
             break;
+        } else {
+            console.log(chalk.yellow('Invalid action!'));
         }
     }
 };
