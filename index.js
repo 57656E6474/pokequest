@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const axios = require('axios');
-const inquirer = require('inquirer');
-const chalk = require('chalk');
+import axios from 'axios';
+import inquirer from 'inquirer';
+import chalk from 'chalk';
 
 // Helper function to fetch Pokémon data
 const getPokemonData = async (name) => {

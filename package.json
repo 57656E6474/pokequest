@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "description": "Using the PokeAPI, you will have an amazing adventure straight from your terminal",
   "main": "index.js",
+  "type": "module",
   "bin": {
     "pokequest": "./index.js"
   },
