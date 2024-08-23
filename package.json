@@ -1,0 +1,24 @@
+{
+  "name": "pokequest",
+  "version": "0.0.1",
+  "description": "Using the PokeAPI, you will have an amazing adventure straight from your terminal",
+  "main": "index.js",
+  "bin": {
+    "pokequest": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pokemon",
+    "cli",
+    "game"
+  ],
+  "author": "Ralph Wendt",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.5",
+    "chalk": "^5.3.0",
+    "inquirer": "^10.1.8"
+  }
+}
