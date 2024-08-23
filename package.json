@@ -1,6 +1,6 @@
 {
   "name": "pokequest",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Using the PokeAPI, you will have an amazing adventure straight from your terminal",
   "main": "index.js",
   "type": "module",
