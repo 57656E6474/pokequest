@@ -19,10 +19,18 @@ const getPokemonData = async (name) => {
 class Pokemon {
     constructor(name, pokeData) {
         this.name = name;
+        this.maxHp = pokeData.stats[0].base_stat;
         this.hp = pokeData.stats[0].base_stat;
         this.attack = pokeData.stats[1].base_stat;
         this.defense = pokeData.stats[2].base_stat;
         this.moves = pokeData.moves.slice(0, 4).map(move => move.move.name);
+        this.gold = 0;
+        this.goldMultiplier = 1.0;
+    }
+
+    earnGold(amount) {
+        this.gold += amount;
+        console.log(chalk.green(`You earned ${amount} gold! You now have ${this.gold} gold.`));
     }
 
     attackMove(opponent) {
@@ -39,11 +47,15 @@ class Pokemon {
     }
 
     showInfo() {
+        console.log('');
         console.log(chalk.cyan(`\n${this.name.toUpperCase()} INFO`));
-        console.log(chalk.cyan(`HP: ${this.hp}`));
-        console.log(chalk.cyan(`Attack: ${this.attack}`));
+        console.log(chalk.cyan('-'.repeat(this.name.length + 5)));
+        console.log(chalk.cyan(`HP:      ${this.hp} / ${this.maxHp}`));
+        console.log(chalk.cyan(`Attack:  ${this.attack}`));
         console.log(chalk.cyan(`Defense: ${this.defense}`));
-        console.log(chalk.cyan(`Moves: ${this.moves.join(', ')}\n`));
+        console.log(chalk.cyan(`Moves:   ${this.moves.join(', ')}\n`));
+        console.log(chalk.yellow(`Gold:    ${this.gold}`));
+        console.log('');
     }
 }
 
@@ -67,6 +79,11 @@ const encounterPokemon = async () => {
     return wildPokemon[Math.floor(Math.random() * wildPokemon.length)].toLowerCase();
 };
 
+const calculateGoldEarned = (playerPokemon, wildPokemon) => {
+    const totalStats = wildPokemon.hp + wildPokemon.attack + wildPokemon.defense;
+    return Math.round((totalStats / 50) * playerPokemon.goldMultiplier);
+}
+
 // Battle function
 const battle = async (playerPokemon, wildPokemon) => {
     console.log(chalk.red(`A wild ${wildPokemon.name} appears!`));
@@ -83,6 +100,9 @@ const battle = async (playerPokemon, wildPokemon) => {
             const defeated = playerPokemon.attackMove(wildPokemon);
             if (defeated) {
                 console.log(chalk.green(`You defeated ${wildPokemon.name}!`));
+
+                playerPokemon.earnGold(calculateGoldEarned(playerPokemon, wildPokemon));
+
                 break;
             }
             wildPokemon.attackMove(playerPokemon);
