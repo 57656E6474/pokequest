@@ -26,6 +26,21 @@ class Pokemon {
         this.moves = pokeData.moves.slice(0, 4).map(move => move.move.name);
         this.gold = 0;
         this.goldMultiplier = 1.0;
+        this.inventory = [];
+    }
+
+    showInventory() {
+        if (this.inventory.length === 0) {
+            console.log(chalk.yellow('You have no items in your inventory.'));
+            return;
+        }
+
+        console.log(chalk.yellow('INVENTORY'));
+        console.log(chalk.yellow('-'.repeat(9)));
+        this.inventory.forEach(item => {
+            console.log(chalk.yellow(`${item.name} x${item.quantity} - ${item.description}`));
+        });
+        console.log('');
     }
 
     earnGold(amount) {
@@ -93,7 +108,7 @@ const battle = async (playerPokemon, wildPokemon) => {
                 type: 'list',
                 name: 'action',
                 message: 'Choose an action:',
-                choices: ['Fight', 'Info', 'Run'],
+                choices: ['Fight', 'Info', 'Inventory', 'Run'],
             }
         ]);
         if (answers.action === 'Fight') {
@@ -112,6 +127,8 @@ const battle = async (playerPokemon, wildPokemon) => {
             }
         } else if (answers.action === 'Info') {
             playerPokemon.showInfo();
+        } else if (answers.action === 'Inventory') {
+            playerPokemon.showInventory();
         } else if (answers.action === 'Run') {
             console.log(chalk.cyan('You ran away!'));
             break;
