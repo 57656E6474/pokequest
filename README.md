@@ -37,6 +37,7 @@ pokequest
 ## Features
 - **Battle System**: Engage in turn-based battles with wild Pokémon.
 - **Stats Display**: Check your Pokémon's current stats and available moves during battle.
+- **Inventory Management**: View your inventory during battles and manage items like potions.
 - **Gold Rewards**: Earn gold based on the difficulty of the opponent after each victorious battle.
 - **Random Encounters**: Face a variety of wild Pokémon during your journey.
 - **Simple CLI Interface**: Easy-to-use command-line interface for a seamless experience.
@@ -44,6 +45,7 @@ pokequest
 ## Commands
 - **Fight**: Attack the wild Pokémon using one of your Pokémon's moves.
 - **Info**: Display your Pokémon's current stats, including HP, attack, defense, moves, and total gold.
+- **Inventory**: View the items you have in your inventory, such as potions.
 - **Run**: Attempt to flee from the battle.
 
 ## Example
@@ -62,20 +64,28 @@ A wild Zubat appears!
 Choose an action:
 1. Fight
 2. Info
-3. Run
+3. Inventory
+4. Run
 
 > Info
+
 Charmander INFO
-HP: 39
-Attack: 52
+---------------
+HP:      39
+Attack:  52
 Defense: 43
-Moves: Scratch, Growl, Ember, Smokescreen
-Gold: 0
+Moves:   Scratch, Growl, Ember, Smokescreen
+
+Gold:    0
 
 Choose an action:
 1. Fight
 2. Info
-3. Run
+3. Inventory
+4. Run
+
+> Inventory
+You have no items in your inventory.
 
 > Fight
 Charmander used Ember!
