@@ -39,6 +39,7 @@ pokequest
 - **Stats Display**: Check your Pokémon's current stats and available moves during battle.
 - **Inventory Management**: View your inventory during battles and manage items like potions.
 - **Gold Rewards**: Earn gold based on the difficulty of the opponent after each victorious battle.
+- **Shop System**: Purchase items like potions in the shop using the gold you’ve earned.
 - **Random Encounters**: Face a variety of wild Pokémon during your journey.
 - **Simple CLI Interface**: Easy-to-use command-line interface for a seamless experience.
 
@@ -46,6 +47,7 @@ pokequest
 - **Fight**: Attack the wild Pokémon using one of your Pokémon's moves.
 - **Info**: Display your Pokémon's current stats, including HP, attack, defense, moves, and total gold.
 - **Inventory**: View the items you have in your inventory, such as potions.
+- **Shop**: Purchase items like potions using the gold you've earned.
 - **Run**: Attempt to flee from the battle.
 
 ## Example
@@ -65,7 +67,8 @@ Choose an action:
 1. Fight
 2. Info
 3. Inventory
-4. Run
+4. Shop
+5. Run
 
 > Fight
 Charmander used Ember!
@@ -84,7 +87,17 @@ Moves:   Scratch, Growl, Ember, Smokescreen
 Gold:    0
 
 > Inventory
-You have no items in your inventory.
+INVENTORY
+---------
+Potion (x1): Heals 20 HP
+
+> Shop
+Welcome to the Shop!
+You have 10 gold.
+What would you like to buy?
+1. Potion - 5G
+
+> You bought a Potion!
 
 > Run
 You ran away!

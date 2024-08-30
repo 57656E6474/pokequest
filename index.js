@@ -38,7 +38,7 @@ class Pokemon {
         console.log(chalk.yellow('INVENTORY'));
         console.log(chalk.yellow('-'.repeat(9)));
         this.inventory.forEach(item => {
-            console.log(chalk.yellow(`${item.name} x${item.quantity} - ${item.description}`));
+            console.log(chalk.yellow(`${item.name} (x${item.quantity}): ${item.description}`));
         });
         console.log('');
     }
@@ -74,6 +74,48 @@ class Pokemon {
     }
 }
 
+const shop = async (playerPokemon) => {
+    const shopItems = [
+        { name: 'Potion', price: 5, description: 'Heals 20 HP' }
+    ];
+
+    console.log(chalk.magenta(`Welcome to the Shop!`));
+    console.log(chalk.magenta(`You have ${playerPokemon.gold} gold.`));
+
+    const answers = await inquirer.prompt([
+        {
+            type: 'list',
+            name: 'item',
+            message: 'What would you like to buy?',
+            choices: shopItems.map(item => `${item.name} - ${item.price}G`),
+            when: () => playerPokemon.gold >= 5
+        }
+    ]);
+
+    const selectedItem = shopItems.find(item => answers.item && answers.item.startsWith(item.name));
+
+    if (selectedItem && playerPokemon.gold < selectedItem.price) {
+        console.log(chalk.red(`You don't have enough gold!`));
+        return;
+    }
+
+    if (!selectedItem) {
+        console.log(chalk.red(`Have a nice day!`));
+        return;
+    }
+
+    playerPokemon.gold -= selectedItem.price;
+
+    const existingItem = playerPokemon.inventory.find(item => item.name === selectedItem.name);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        playerPokemon.inventory.push({ name: selectedItem.name, description: selectedItem.description, quantity: 1 });
+    }
+
+    console.log(chalk.green(`You bought a ${selectedItem.name}!`));
+};
+
 // Prompt user to choose a starter Pokémon
 const choosePokemon = async () => {
     const starters = ["Bulbasaur", "Charmander", "Squirtle"];
@@ -108,7 +150,7 @@ const battle = async (playerPokemon, wildPokemon) => {
                 type: 'list',
                 name: 'action',
                 message: 'Choose an action:',
-                choices: ['Fight', 'Info', 'Inventory', 'Run'],
+                choices: ['Fight', 'Info', 'Inventory', 'Shop', 'Run'],
             }
         ]);
         if (answers.action === 'Fight') {
@@ -129,6 +171,8 @@ const battle = async (playerPokemon, wildPokemon) => {
             playerPokemon.showInfo();
         } else if (answers.action === 'Inventory') {
             playerPokemon.showInventory();
+        } else if (answers.action === 'Shop') {
+            await shop(playerPokemon);
         } else if (answers.action === 'Run') {
             console.log(chalk.cyan('You ran away!'));
             break;
