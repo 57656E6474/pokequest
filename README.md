@@ -67,8 +67,13 @@ Choose an action:
 3. Inventory
 4. Run
 
-> Info
+> Fight
+Charmander used Ember!
+Zubat took 15 damage!
+You defeated Zubat!
+You earned 12 gold! You now have 12 gold.
 
+> Info
 Charmander INFO
 ---------------
 HP:      39
@@ -78,20 +83,12 @@ Moves:   Scratch, Growl, Ember, Smokescreen
 
 Gold:    0
 
-Choose an action:
-1. Fight
-2. Info
-3. Inventory
-4. Run
-
 > Inventory
 You have no items in your inventory.
 
-> Fight
-Charmander used Ember!
-Zubat took 15 damage!
-You defeated Zubat!
-You earned 12 gold! You now have 12 gold.
+> Run
+You ran away!
+
 ```
 
 ## Contributing
